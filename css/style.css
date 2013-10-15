@@ -1,0 +1,18 @@
+.banner {
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fafafa),color-stop(1,#f5f5f5));
+  padding: 1.2em 5%;
+}
+
+.navigation,
+.search-form,
+.results {
+  padding: 1.2em 5%;
+}
+
+.results {
+  margin-left: -2em;
+}
+
+h1 {
+  font: 100 24px/28px "open sans",arial,sans-serif;
+}

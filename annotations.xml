@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GoogleCustomizations>
+  <CustomSearchEngine>
+    <Title>Fred Rogers - Freebase</Title>
+    <Description>Feed generated from all links in the page</Description>
+    <Context>
+      <BackgroundLabels>
+        <Label name="_cse_feed" mode="FILTER"/>
+      </BackgroundLabels>
+    </Context>
+  </CustomSearchEngine>
+  <Annotations>
+    {% for value in values %}
+    <Annotation about="{{value.value}}*">
+      <Label name="_cse_feed"/>
+    </Annotation>
+    {% endfor %}
+  </Annotations>
+</GoogleCustomizations>

@@ -1,0 +1,33 @@
+application: devnook-devrel
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /(.*\.xml)
+  mime_type: application/xml
+  static_files: static/\1
+  upload: static/(.*\.xml)
+
+- url: /images
+  static_dir: images
+
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
+- name: jinja2
+  version: latest

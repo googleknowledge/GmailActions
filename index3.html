@@ -1,0 +1,315 @@
+<html>
+<head>
+  <title></title>
+
+  <link rel="stylesheet" type="text/css" href="https://spec.googleplex.com/assets/css/kd_components.css">
+  <link rel="stylesheet" type="text/css" href="https://spec.googleplex.com/assets/css/kd_components_google.css">
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+
+
+  <script type="text/javascript">
+
+var cx = '017643444788069204610:ea_c4kzu4-8'; // education test
+
+var init = function(cx) {
+  //var cx = '017643444788069204610:t5phifdbs2g';
+  //var cx = '011100701990899434039:caqm-wwf3ps';
+  //var cx = '017643444788069204610:ea_c4kzu4-8'; // education test
+  var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+  gcse.src = (document.location.protocol == 'https' ? 'https:' : 'http:') +
+      '//www.google.com/cse/cse.js?cx=' + cx;
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+};
+
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(window.location.search)||[,null])[1]
+    );
+}
+
+console.log(cx)
+
+cx = getURLParameter('cx') == 'null' ? cx : getURLParameter('cx');
+console.log(decodeURI(cx))
+init(cx)
+  </script>
+
+
+
+
+
+</head>
+<body>
+
+  <div id="test"></div>
+
+  <style type="text/css" media="screen">
+    body {
+      margin: 1em;
+    }
+
+    #kd-search {
+      left: 260px;
+    }
+
+    #search-field {
+      width: 400px;
+      height: 34px;
+    }
+
+    #kd-search a img {
+      margin-top: 2px;
+    }
+
+
+    ul:empty {
+      display:none;
+    }
+
+    ul {
+      color: #666;
+      list-style: disc inside none;
+    }
+
+    .result {
+      margin: 1.2em 0;
+    }
+
+    .timerequired {
+      color: red;
+      font-weight: bold;
+    }
+
+    .debug {
+      color: #aaa;
+    }
+
+    dd, dt {
+      display: table-cell;
+    }
+
+    dt {
+      color: #0b5394;
+      padding: 5px 5px 5px 0;
+    }
+
+    .gs-title * {
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .gs-result .gs-title,
+    .gs-result .gs-title * {
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .snippet-body {
+      margin-left: 70px;
+    }
+
+    .gs-snippet {
+      margin: 0.5em 0;
+    }
+
+    .gs-webResult div.gs-visibleUrl-short, .gs-promotion div.gs-visibleUrl-short {
+      display: block;
+    }
+
+    #extra-field {
+      width:200px;
+      opacity: 0.5;
+    }
+
+    .banner {
+      background: url('/images/banner.jpg') 0% 0% no-repeat;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      width: 100%;
+      height: 300px;
+      padding-top: 200px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .maia-header {
+      background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fafafa),color-stop(1,#f5f5f5));
+      padding: 1em;
+
+      position: relative;
+    }
+
+    h1 {
+      font-size: 1.5em;
+    }
+
+    .search-form {
+      width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-form div {
+      margin: 5px 0;
+      line-height: 34px;
+    }
+
+    .search-form div a {
+      color: white;
+    }
+
+    .maia-aux {
+       padding-left: 100px !important;
+    }
+
+
+
+  </style>
+  <div class="maia-header" id="maia-header" role="banner">
+    <div class="maia-aux">
+      <h1>
+        Custom Search for Education</a>
+      </h1>
+    </div>
+  </div>
+
+  <div>
+    <span class="kd-segmentedcontrol">
+      <a class="kd-button left"
+         style="-webkit-user-select: none;"
+         data-cx="017643444788069204610:cqccxk_5fec">unresrticted index</a>
+      <a class="kd-button mid"
+         style="-webkit-user-select: none;"
+         data-cx="017643444788069204610:ea_c4kzu4-8">curated index</a>
+    </span>
+
+  </div>
+
+  <div>
+    <div class="search-form">
+
+
+      <div>
+        <input type="text" name="search-field" id="search-field" value="fractions">
+        <button class="maia-button" id="search-button"><span class="maia-search-icon">Search</span></button>
+        </div>
+        <div>
+          <strong>Typical age range</strong>
+          <select name="typicalagerange" id="typicalagerange-field" class="kd-button kd-menubutton kd-select">
+            <option value="">Any</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            option
+          </select>
+
+        </div>
+        <div>
+          <strong>Grade</strong>
+          <select name="grade" id="grade-field" class="kd-button kd-menubutton kd-select">
+            <option value="">Any</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            option
+          </select>
+        </div>
+        <div>
+          <strong>Additional filter:</strong>
+          <input type="text" id="extra-field">
+          <a id="clear-extra">clear</a>
+
+        </div>
+    </div>
+  </div>
+
+
+<!-- Try switching the attribute value to "true" or "false" -->
+<div id="base_webResult" style="display:none;">
+  <div class="gs-webResult gs-result" data-vars="{longUrl:function() {
+        var i = unescapedUrl.indexOf(visibleUrl);
+        return i < 1 ? visibleUrl : unescapedUrl.substring(i);}}">
+    <div data-if="Vars.richSnippet" data-attr="0"
+      data-body="render('thumbnail',richSnippet,{url:unescapedUrl,target:target})"></div>
+
+    <div class="snippet-body">
+      <a class="gs-title" data-attr="{href:unescapedUrl,target:target}"
+        data-body="html(title)"></a>
+
+      <div class="gs-snippet" data-body="html(content)"></div>
+      <div class="gs-visibleUrl gs-visibleUrl-short" data-body="longUrl()"></div>
+
+
+      <div>
+        {% for property in lrmi_properties %}
+          <dl>
+            <dt>{{property}}: </dt>
+            <dd>
+              <span data-if="richSnippet.scholarlyarticle && richSnippet.scholarlyarticle.{{property|replace(" ", "")|lower}}"
+                    data-body="richSnippet.scholarlyarticle.{{property|replace(" ", "")|lower}}"></span>
+              <span data-elif="richSnippet.creativework && richSnippet.creativework.{{property|replace(" ", "")|lower}}"
+                    data-body="richSnippet.creativework.{{property|replace(" ", "")|lower}}"></span>
+              <span data-elif="true" data-body="'N/A'"></span>
+              <a href=""
+                 class="moreLikeThis"
+                 data-if="richSnippet.creativework && richSnippet.creativework.{{property|replace(" ", "")|lower}}"
+                 data-attr="{'data-propertyName': '{{property|replace(" ", "")|lower}}',
+                 'data-propertyValue': richSnippet.creativework.{{property|replace(" ", "")|lower}}}"
+                 > &raquo; more like this</a>
+              <a href=""
+                 class="moreLikeThis"
+                 data-if="richSnippet.scholarlyarticle && richSnippet.scholarlyarticle.{{property|replace(" ", "")|lower}}"
+                 data-attr="{'data-propertyName': '{{property|replace(" ", "")|lower}}',
+                 'data-propertyValue': richSnippet.scholarlyarticle.{{property|replace(" ", "")|lower}}}"
+                 > &raquo; more like this</a>
+            </dd>
+          </dl>
+        {% endfor %}
+        <dl data-if="richSnippet.alignmentobject">
+          <dt>Teaches: </dt>
+          <dd>
+            <ul data-if="richSnippet.alignmentobject">
+              <li
+              data-foreach="richSnippet.alignmentobject"
+              data-body="'(' + Cur.targetdescription + ') ' + Cur.targetname.slice(0, 130) + '...'"></li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      <div class="debug" data-attr="{title: JSON.stringify(richSnippet)}">debug</div>
+
+
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<gcse:searchresults-only
+    gname="lrmi-search"
+    defaultToRefinement="LRMI sites"
+    enableImageSearch="false"
+></gcse:searchresults-only>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+</body>
+</html>
