@@ -1,52 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Freebase search</title>
+  <title>Gmail - Google Now</title>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
-<script type="text/javascript">
-$(function() {
-  $("#myinput").suggest({filter:'(all type:/film/director)'});
-  $("#myinput").suggest().bind("fb-select", function(e, data) {
-    console.log(data);
-    var mssg = 'This is ' + data.name + ' (' + data.mid + ') notable for ' + data.notable.name + ' (' + data.notable.id + ')';
-    $('#details').text(mssg);
 
-    $.get('https://www.googleapis.com/freebase/v1/search?query=hey&filter=(any%20type:/music/composition)&limit=100',
-      function(data) {
-        console.log(data)
-    })
-    //document.write('<a href="http://localhost:8080/cse?mid=' + data.mid + '">check annotations for ' + data.mid + '</a>');
-
-    /*(function() {
-      var cref = 'http://devnook-devrel.appspot.com/cse?mid=' + data.mid; // Insert your own Custom Search engine ID here
-      var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = false;
-      gcse.src = (document.location.protocol == 'https' ? 'https:' : 'http:') +
-          '//www.google.com/cse/cse.js?cref=' + cref;
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-    })();
-    */
-  });
-});
-</script>
 
 
 
 </head>
 <body>
-
-<a href="http://google.com">google.com</a>
-<a href="http://wp.pl">wp.pl</a>
-
-<input type="text" id="myinput"/>
-<div id="details"></div>
-
-
-
-
-<!-- Place this tag where you want both of the search box and the search results to render -->
-<gcse:search></gcse:search>
+  <a href="{{login_url}}">login_url</a>
+  <a href="{{logout_url}}">logout_url</a>
+<form action="/" method="POST">
+<textarea id="email-content" name="email-content">hello</textarea>
+<input type="submit" id="send" value="send">
+</form>
 
 </body>
 </html>
