@@ -33,6 +33,8 @@ from urlparse import urlparse
 from google.appengine.api import users
 from google.appengine.api import mail
 
+from webapp2_extras import sessions
+
 
 
 jinja_environment = jinja2.Environment(
@@ -40,13 +42,30 @@ jinja_environment = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'])
 
 
+class BaseHandler(webapp2.RequestHandler):
+    def dispatch(self):
+        # Get a session store for this request.
+        self.session_store = sessions.get_store(request=self.request)
 
-class MainHandler(webapp2.RequestHandler):
+        try:
+            # Dispatch the request.
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            # Save all sessions.
+            self.session_store.save_sessions(self.response)
+
+
+class MainHandler(BaseHandler):
   def get(self):
     template = jinja_environment.get_template('index.html')
     login_url = users.create_login_url('/')
     logout_url = users.create_logout_url('/')
-    self.response.out.write(template.render(login_url=login_url, logout_url=logout_url))
+    self.session['foo'] = 'bar'
+    foo = self.session.get('foo')
+    logging.info(foo)
+    self.session.add_flash('value', level=None, key='_flash')
+
+    self.response.out.write(template.render(login_url=login_url, logout_url=logout_url, flash=self.session.get_flashes(key='_flash')))
 
 
   def post(self):
@@ -58,13 +77,21 @@ class MainHandler(webapp2.RequestHandler):
       content = self.request.get('email-content')
       body = content
       mail.send_mail(email, email, subject, body='', html=body)
+    self.redirect('/')
+
+  @webapp2.cached_property
+  def session(self):
+      # Returns a session using the default cookie key.
+      return self.session_store.get_session()
 
 
 
-
-
+config = {}
+config['webapp2_extras.sessions'] = {
+    'secret_key': 'my-super-secret-key',
+}
 
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
-], debug=True)
+], config=config, debug=True)

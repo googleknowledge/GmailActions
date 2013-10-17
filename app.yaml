@@ -14,6 +14,11 @@ handlers:
   static_files: static/\1
   upload: static/(.*\.xml)
 
+- url: /samples/(.*\.html)
+  mime_type: text/html
+  static_files: samples/\1
+  upload: samples/(.*\.html)
+
 - url: /images
   static_dir: images
 

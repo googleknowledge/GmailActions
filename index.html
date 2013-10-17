@@ -11,12 +11,28 @@
 
 </head>
 <body>
+
+  {% for message, level in flash %}
+    {{message}}{{level}}
+  {% endfor %}
   <a href="{{login_url}}">login_url</a>
   <a href="{{logout_url}}">logout_url</a>
+
+<button id="load-sample">load sample</button>
 <form action="/" method="POST">
 <textarea id="email-content" name="email-content">hello</textarea>
 <input type="submit" id="send" value="send">
 </form>
+
+<script type="text/javascript">
+$('#load-sample').click(function() {
+  console.log('hi')
+  $.get('/samples/sample.html', function(data) {
+    console.log(data);
+    $('#email-content').text(data)
+  })
+});
+</script>
 
 </body>
 </html>
