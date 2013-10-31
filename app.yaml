@@ -28,10 +28,13 @@ handlers:
 - url: /js
   static_dir: js
 
-- url: /success
+- url: /success/.*
   script: main.app
 
-- url: /failure
+- url: /failure/.*
+  script: main.app
+
+- url: /examples/sample/.*
   script: main.app
 
 - url: .*

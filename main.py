@@ -35,6 +35,9 @@ from google.appengine.api import mail
 
 from webapp2_extras import sessions
 
+from google.appengine.api import channel
+
+
 
 
 jinja_environment = jinja2.Environment(
@@ -68,7 +71,10 @@ class MainHandler(BaseHandler):
     user = users.get_current_user()
     logging.info(user.email())
 
-    self.response.out.write(template.render(user=user.email(), logout_url=logout_url, flash=self.session.get_flashes(key='_flash')))
+    #token = channel.create_channel(user.user_id())
+    token = channel.create_channel('aaa')
+
+    self.response.out.write(template.render(user=user.email(), token=token, logout_url=logout_url, flash=self.session.get_flashes(key='_flash')))
 
 
   def post(self):
@@ -85,17 +91,29 @@ class MainHandler(BaseHandler):
   @webapp2.cached_property
   def session(self):
       # Returns a session using the default cookie key.
+      # send_message(client_id, message)
       return self.session_store.get_session()
 
 
+class SampleHandler(webapp2.RequestHandler):
+    def get(self, token):
+      logging.info('dddddddddddddddddddd')
+      template = jinja_environment.get_template('sample.html')
+      self.response.out.write(template.render(token=token))
+
+
+
 class FailureHandler(webapp2.RequestHandler):
-    def get(self):
-      self.error(502)
+    def get(self, token):
+      channel.send_message(token, 'Searver encounter an error! 400 Bad Request ' + self.request.path)
+      self.error(400)
+
       self.response.out.write('failure')
 
 
 class SuccessHandler(webapp2.RequestHandler):
-    def get(self):
+    def get(self, token):
+      channel.send_message(token, 'Received a call! 200 OK ' + self.request.path)
       self.response.out.write('success')
 
 
@@ -108,7 +126,9 @@ config['webapp2_extras.sessions'] = {
 
 
 app = webapp2.WSGIApplication([
+
+    webapp2.Route('/success/<token>', handler=SuccessHandler, name='success'),
+    webapp2.Route('/failure/<token>', handler=FailureHandler, name='failure'),
+    webapp2.Route('/examples/sample/<token>', handler=SampleHandler, name='sample'),
     ('/', MainHandler),
-    ('/success', SuccessHandler),
-    ('/failure', FailureHandler),
 ], config=config, debug=True)

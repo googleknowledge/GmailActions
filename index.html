@@ -7,7 +7,6 @@
 
 
   <head>
-    <link rel="stylesheet" href="//developers.google.com/css/screen.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/kd_components.css" type="text/css" media="screen" charset="utf-8">
 
     <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -61,7 +60,7 @@
       <div class="col-md-6">
         <select id="load-sample" class="map-button kd-menubutton" style="-webkit-user-select: none;">
           <option value="">load sample</option>
-          <option value="/samples/sample.html">Event</option>
+          <option value="/examples/sample/{{token}}">Event</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -71,6 +70,15 @@
         </form>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-12" id="client-log">
+        <p></p>
+      </div>
+
+    </div>
+
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
 
     <script>
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
@@ -96,19 +104,45 @@
     }
     $(document).ready(function(){
       var content_cookie = $.cookie('validator_content');
+
       $("#email_form").submit(function() {
-        $(this).find('input[name="content"]').val(editor.getValue());
-        $.cookie('validator_content', editor.getValue());
+        $.post('/', {'content': editor.getValue()}, function(data) {
+          console.log('success');
+          //console.log(data);
+
+        });
+        return false;
+
         });
     });
 
     $('#load-sample').change(function() {
-      console.log('hi')
       $.get($(this).val(), function(data) {
-        console.log(data);
         editor.setValue(data);
       })
     });
+
+    var onOpened = function() {
+      connected = true;
+      console.log(connected)
+      console.log('{{ token }}')
+      console.log(channel)
+      var token = channel.token_ || channel.fd;
+      $('#client-log p').text('Listening for calls to /' + token);
+    };
+
+    var onMessage = function(msg) {
+      console.log(msg)
+      $('#client-log').append('<p>' + msg.data + '</p>')
+    };
+
+    var channel = new goog.appengine.Channel('{{ token }}');
+    var socket = channel.open();
+    socket.onopen = onOpened;
+    socket.onmessage = onMessage;
+
+
+
     </script>
 
 
