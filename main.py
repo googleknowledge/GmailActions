@@ -65,7 +65,10 @@ class MainHandler(BaseHandler):
     logging.info(foo)
     self.session.add_flash('value', level=None, key='_flash')
 
-    self.response.out.write(template.render(login_url=login_url, logout_url=logout_url, flash=self.session.get_flashes(key='_flash')))
+    user = users.get_current_user()
+    logging.info(user.email())
+
+    self.response.out.write(template.render(user=user.email(), logout_url=logout_url, flash=self.session.get_flashes(key='_flash')))
 
 
   def post(self):
@@ -74,7 +77,7 @@ class MainHandler(BaseHandler):
       pass
     else:
       subject = "Confirm your registration"
-      content = self.request.get('email-content')
+      content = self.request.get('content')
       body = content
       mail.send_mail(email, email, subject, body='', html=body)
     self.redirect('/')
@@ -85,6 +88,18 @@ class MainHandler(BaseHandler):
       return self.session_store.get_session()
 
 
+class FailureHandler(webapp2.RequestHandler):
+    def get(self):
+      self.error(502)
+      self.response.out.write('failure')
+
+
+class SuccessHandler(webapp2.RequestHandler):
+    def get(self):
+      self.response.out.write('success')
+
+
+
 
 config = {}
 config['webapp2_extras.sessions'] = {
@@ -93,5 +108,7 @@ config['webapp2_extras.sessions'] = {
 
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/success', SuccessHandler),
+    ('/failure', FailureHandler),
 ], config=config, debug=True)

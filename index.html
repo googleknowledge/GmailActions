@@ -1,38 +1,127 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gmail - Google Now</title>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
 
 
 
 
-</head>
-<body>
 
-  {% for message, level in flash %}
-    {{message}}{{level}}
-  {% endfor %}
-  <a href="{{login_url}}">login_url</a>
-  <a href="{{logout_url}}">logout_url</a>
+  <head>
+    <link rel="stylesheet" href="//developers.google.com/css/screen.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/kd_components.css" type="text/css" media="screen" charset="utf-8">
 
-<button id="load-sample">load sample</button>
-<form action="/" method="POST">
-<textarea id="email-content" name="email-content">hello</textarea>
-<input type="submit" id="send" value="send">
-</form>
+    <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
 
-<script type="text/javascript">
-$('#load-sample').click(function() {
-  console.log('hi')
-  $.get('/samples/sample.html', function(data) {
-    console.log(data);
-    $('#email-content').text(data)
-  })
-});
-</script>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/codemirror.css">
 
-</body>
+  <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/validator.css" type="text/css" media="screen" charset="utf-8">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+
+    <script src="js/codemirror.js"></script>
+    <script src="js/xml.js"></script>
+    <script src="js/javascript.js"></script>
+    <script src="js/css.js"></script>
+    <script src="js/htmlmixed.js"></script>
+
+    <title>Schema Validator</title>
+  </head>
+
+  <body>
+
+    <div class="map-appbar">
+      <div class="container">
+      <div class="row">
+        <h1 class="map-appname">Send Gmail Actions email</h1>
+      </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        <p class="pull-right">
+          Logged in as {{user}}. Sending email to {{user}}.
+          <a href="{{logout_url}}">Log out</a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form id="content_form">
+          <div><textarea id="code" name="content">Paste email markup here</textarea></div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <select id="load-sample" class="map-button kd-menubutton" style="-webkit-user-select: none;">
+          <option value="">load sample</option>
+          <option value="/samples/sample.html">Event</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <form id="email_form" action="" method="post" accept-charset="UTF-8">
+          <input type="hidden" name="content">
+          <input type="submit" name="email" class="map-button map-button-red pull-right" value="Send Email">
+        </form>
+      </div>
+    </div>
+
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: {name: "htmlmixed"},
+        tabMode: "indent",
+        lineNumbers: true
+      });
+
+      editor.on('focus', function() {
+          if (editor.getValue() === 'Paste email markup here') {
+              editor.setValue('');
+          }
+    });
+    editor.on('blur', function() {
+          if (editor.getValue() === '') {
+              editor.setValue('Paste email markup here');
+          }
+    });
+
+
+    if (window != window.top) {
+      $("body").addClass('iniframe');
+    }
+    $(document).ready(function(){
+      var content_cookie = $.cookie('validator_content');
+      $("#email_form").submit(function() {
+        $(this).find('input[name="content"]').val(editor.getValue());
+        $.cookie('validator_content', editor.getValue());
+        });
+    });
+
+    $('#load-sample').change(function() {
+      console.log('hi')
+      $.get($(this).val(), function(data) {
+        console.log(data);
+        editor.setValue(data);
+      })
+    });
+    </script>
+
+
+
+
+      </div>
+
+  </div>
+
+
+
+
+  </body>
 </html>
+
+

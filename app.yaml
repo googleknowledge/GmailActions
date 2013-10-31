@@ -28,6 +28,12 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /success
+  script: main.app
+
+- url: /failure
+  script: main.app
+
 - url: .*
   script: main.app
   login: required

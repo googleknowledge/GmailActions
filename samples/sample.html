@@ -2,12 +2,16 @@
   <head>
     <script type="application/ld+json">
     {
-      "@context":       "http://schema.org",
-      "@type":          "EmailMessage",
-      "description":    "Check this out",
+      "@context": "http://schema.org",
+      "@type": "EmailMessage",
+      "description": "Approval request for John's $10.13 expense for office supplies",
       "action": {
-        "@type": "ViewAction",
-        "url":   "https://www.youtube.com/watch?v=eH8KwfdkSqU"
+        "@type": "ConfirmAction",
+        "name": "Approve Expense",
+        "handler": {
+          "@type": "HttpActionHandler",
+          "url": "http://devnook-devrel.appspot.com/success"
+        }
       }
     }
     </script>
