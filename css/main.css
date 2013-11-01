@@ -1,0 +1,21 @@
+.map-appbar {
+
+	color: black;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.map-appbar h1 {
+
+
+font-size: 20px;
+font-weight: normal;
+line-height: 29px;
+color: #DD4B39;
+white-space: nowrap;
+
+}
+
+.map-button-red {
+	margin-bottom: 0;
+}
+
