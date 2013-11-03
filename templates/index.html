@@ -2,24 +2,19 @@
 <!DOCTYPE html>
 <html>
 
-
-
-
-
   <head>
     <link rel="stylesheet" href="css/kd_components.css" type="text/css" media="screen" charset="utf-8">
 
     <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
 
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/codemirror.css">
 
+  <link rel="stylesheet" href="css/codemirror.css">
   <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="css/validator.css" type="text/css" media="screen" charset="utf-8">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/jquery.cookie.js"></script>
+
 
     <script src="js/codemirror.js"></script>
     <script src="js/xml.js"></script>
@@ -27,7 +22,7 @@
     <script src="js/css.js"></script>
     <script src="js/htmlmixed.js"></script>
 
-    <title>Schema Validator</title>
+    <title>Test Gmail Schemas</title>
   </head>
 
   <body>
@@ -35,20 +30,25 @@
     <div class="map-appbar">
       <div class="container">
       <div class="row">
-        <h1 class="map-appname">Send Gmail Actions email</h1>
+        <div class="col-md-12">
+          <h1 class="map-appname">Send Gmail Actions email</h1>
+        </div>
       </div>
       </div>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-        <p class="pull-right">
-          Logged in as {{user}}. Sending email to {{user}}.
-          <a href="{{logout_url}}">Log out</a>
-        </p>
+        <div class="col-md-3">
+          <p id="flash"></p>
+        </div>
+        <div class="col-md-9">
+          <p class="pull-right">
+            Logged in as <strong>{{user}}</strong>. Sending email to <strong>{{user}}</strong>.
+            <a href="{{logout_url}}">Log out</a>
+          </p>
+        </div>
       </div>
-    </div>
     <div class="row">
       <div class="col-md-12">
         <form id="content_form">
@@ -60,7 +60,11 @@
       <div class="col-md-6">
         <select id="load-sample" class="map-button kd-menubutton" style="-webkit-user-select: none;">
           <option value="">load sample</option>
-          <option value="/examples/sample/{{token}}">Event</option>
+          <option value="/examples/oneclick/{{token}}">One-click action</option>
+          <option value="/examples/rate/{{token}}">Rate action</option>
+          <option value="/examples/track/{{token}}">Track action</option>
+          <option value="/examples/goto/{{token}}">Go-to action</option>
+          <option value="/examples/event-card/{{token}}">Event card</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -103,13 +107,11 @@
       $("body").addClass('iniframe');
     }
     $(document).ready(function(){
-      var content_cookie = $.cookie('validator_content');
+
 
       $("#email_form").submit(function() {
         $.post('/', {'content': editor.getValue()}, function(data) {
-          console.log('success');
-          //console.log(data);
-
+          $('#flash').text(data);
         });
         return false;
 
@@ -117,7 +119,12 @@
     });
 
     $('#load-sample').change(function() {
-      $.get($(this).val(), function(data) {
+      var now  = new Date();
+      var tz = now.getTimezoneOffset() / -60;
+      tz = tz < 10 ? '0' + tz : tz;
+      var googleNowDate = now.toISOString().replace(/\.[0-9]*Z/, '%2B');
+      var url = $(this).val() + '?googleNowDate=' + googleNowDate + tz + ':00';
+      $.get(url, function(data) {
         editor.setValue(data);
       })
     });

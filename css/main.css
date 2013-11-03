@@ -19,3 +19,11 @@ white-space: nowrap;
 	margin-bottom: 0;
 }
 
+.row p {
+  margin: 1.5em 0 0.5em 0;
+}
+
+#flash {
+  color: #DD4B39;
+  font-style: italic;
+}
