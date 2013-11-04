@@ -60,7 +60,6 @@ class MainHandler(webapp2.RequestHandler):
 
 
   def post(self):
-    """
     email = users.get_current_user().email()
     if not mail.is_email_valid(email):
       pass
@@ -70,15 +69,10 @@ class MainHandler(webapp2.RequestHandler):
       body = content
       mail.send_mail(email, email, subject, body='', html=body)
     self.response.out.write('The email was sent.')
-    """
-    pass
 
 
-  @webapp2.cached_property
-  def session(self):
-      # Returns a session using the default cookie key.
-      # send_message(client_id, message)
-      return self.session_store.get_session()
+
+
 
 
 class SampleHandler(webapp2.RequestHandler):
