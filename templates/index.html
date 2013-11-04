@@ -1,39 +1,22 @@
-
 <!DOCTYPE html>
 <html>
-
   <head>
-    <link rel="stylesheet" href="css/kd_components.css" type="text/css" media="screen" charset="utf-8">
-
-    <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
-
-
-  <link rel="stylesheet" href="css/codemirror.css">
-  <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="css/validator.css" type="text/css" media="screen" charset="utf-8">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-
-
-    <script src="js/codemirror.js"></script>
-    <script src="js/xml.js"></script>
-    <script src="js/javascript.js"></script>
-    <script src="js/css.js"></script>
-    <script src="js/htmlmixed.js"></script>
-
     <title>Test Gmail Schemas</title>
+    <link href='//fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="css/validator.css" type="text/css" media="screen" charset="utf-8">
   </head>
-
   <body>
 
     <div class="map-appbar">
       <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="map-appname">Send Gmail Actions email</h1>
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="map-appname">Send Gmail Actions email</h1>
+          </div>
         </div>
-      </div>
       </div>
     </div>
 
@@ -49,119 +32,45 @@
           </p>
         </div>
       </div>
-    <div class="row">
-      <div class="col-md-12">
-        <form id="content_form">
-          <div><textarea id="code" name="content">Paste email markup here</textarea></div>
-        </form>
+      <div class="row">
+        <div class="col-md-12">
+          <form id="content_form">
+            <div><textarea id="code" name="content">Paste email markup here</textarea></div>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <select id="load-sample" class="map-button kd-menubutton" style="-webkit-user-select: none;">
-          <option value="">load sample</option>
-          <option value="/examples/oneclick/{{token}}">One-click action</option>
-          <option value="/examples/rate/{{token}}">Rate action</option>
-          <option value="/examples/track/{{token}}">Track action</option>
-          <option value="/examples/goto/{{token}}">Go-to action</option>
-          <option value="/examples/event-card/{{token}}">Event card</option>
-        </select>
-      </div>
-      <div class="col-md-6">
-        <form id="email_form" action="" method="post" accept-charset="UTF-8">
-          <input type="hidden" name="content">
-          <input type="submit" name="email" class="map-button map-button-red pull-right" value="Send Email">
-        </form>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12" id="client-log">
-        <p></p>
+      <div class="row">
+        <div class="col-md-6">
+          <select id="load-sample" class="button" style="-webkit-user-select: none;">
+            <option value="">Load sample</option>
+            <option value="/examples/oneclick/{{token}}">One-click action</option>
+            <option value="/examples/rate/{{token}}">Rate action</option>
+            <option value="/examples/track/{{token}}">Track action</option>
+            <option value="/examples/goto/{{token}}">Go-to action</option>
+            <option value="/examples/event-card/{{token}}">Event card</option>
+            <option value="/examples/restaurant-card/{{token}}">Restaurant reservation card</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <a id="send-email" class="button button-red pull-right">Send Email</a>
+        </div>
       </div>
 
-    </div>
+      <div class="row">
+        <div class="col-md-12" id="client-log">
+          <p></p>
+        </div>
+      </div>
 
-    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    </div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-        mode: {name: "htmlmixed"},
-        tabMode: "indent",
-        lineNumbers: true
-      });
-
-      editor.on('focus', function() {
-          if (editor.getValue() === 'Paste email markup here') {
-              editor.setValue('');
-          }
-    });
-    editor.on('blur', function() {
-          if (editor.getValue() === '') {
-              editor.setValue('Paste email markup here');
-          }
-    });
-
-
-    if (window != window.top) {
-      $("body").addClass('iniframe');
-    }
-    $(document).ready(function(){
-
-
-      $("#email_form").submit(function() {
-        $.post('/', {'content': editor.getValue()}, function(data) {
-          $('#flash').text(data);
-        });
-        return false;
-
-        });
-    });
-
-    $('#load-sample').change(function() {
-      var now  = new Date();
-      var tz = now.getTimezoneOffset() / -60;
-      tz = tz < 10 ? '0' + tz : tz;
-      var googleNowDate = now.toISOString().replace(/\.[0-9]*Z/, '%2B');
-      var url = $(this).val() + '?googleNowDate=' + googleNowDate + tz + ':00';
-      $.get(url, function(data) {
-        editor.setValue(data);
-      })
-    });
-
-    var onOpened = function() {
-      connected = true;
-      console.log(connected)
-      console.log('{{ token }}')
-      console.log(channel)
-      var token = channel.token_ || channel.fd;
-      $('#client-log p').text('Listening for calls to /' + token);
-    };
-
-    var onMessage = function(msg) {
-      console.log(msg)
-      $('#client-log').append('<p>' + msg.data + '</p>')
-    };
-
-    var channel = new goog.appengine.Channel('{{ token }}');
-    var socket = channel.open();
-    socket.onopen = onOpened;
-    socket.onmessage = onMessage;
-
-
-
+      var token = '{{token}}';
     </script>
-
-
-
-
-      </div>
-
-  </div>
-
-
-
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="js/codemirror-compressed.js"></script>
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
   </body>
 </html>
 

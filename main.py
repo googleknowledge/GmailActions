@@ -60,6 +60,7 @@ class MainHandler(webapp2.RequestHandler):
 
 
   def post(self):
+    """
     email = users.get_current_user().email()
     if not mail.is_email_valid(email):
       pass
@@ -69,6 +70,8 @@ class MainHandler(webapp2.RequestHandler):
       body = content
       mail.send_mail(email, email, subject, body='', html=body)
     self.response.out.write('The email was sent.')
+    """
+    pass
 
 
   @webapp2.cached_property
