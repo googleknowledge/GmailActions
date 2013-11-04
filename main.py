@@ -85,14 +85,18 @@ class SampleHandler(webapp2.RequestHandler):
 
 class FailureHandler(webapp2.RequestHandler):
     def get(self, token):
-      channel.send_message(token, 'Searver encounter an error! 400 Bad Request ' + self.request.path)
+      msg = ('Searver encounter an error! <span class="failure">400 Bad Request</span> ' +
+             '<span class="path">/failure/token</span>')
+      channel.send_message(token, msg)
       self.error(400)
       self.response.out.write('failure')
 
 
 class SuccessHandler(webapp2.RequestHandler):
     def get(self, token):
-      channel.send_message(token, 'Received a call! 200 OK ' + self.request.path)
+      msg = ('Received a call! <span class="success">200 OK</span> ' +
+             '<span class="path">/success/token</span>')
+      channel.send_message(token, msg)
       self.response.out.write('success')
 
     def post(self, token):

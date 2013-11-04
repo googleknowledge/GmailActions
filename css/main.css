@@ -34,6 +34,24 @@
   font-style: italic;
 }
 
+.success {
+  color: #3DA800;
+  font-weight: bold;
+}
+
+.failure {
+  color: #d14836;
+  font-weight: bold;
+}
+
+.path {
+  font-weight: bold;
+}
+
+.token {
+  color: #aaa;
+}
+
 .button {
     cursor:pointer;
     margin-left: 0;
