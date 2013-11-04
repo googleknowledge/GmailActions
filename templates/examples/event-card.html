@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "EventReservation",
+      "reservationNumber": "E123456789",
+      "underName": {
+        "@type": "Person",
+        "name": "John Smith"
+      },
+      "modifiedTime": "2013-11-02T13:15:00-08:00",
+      "modifyReservationUrl": "http://devnook-devrel.appspot.com/success/{{token}}",
+      "reservationStatus": "confirmed",
+      "reservationFor": {
+        "@type": "Event",
+        "name": "Foo Fighters Concert",
+        "performer": {
+          "@type": "Person",
+          "name": "Metallica",
+          "image": "http://example.com"
+        },
+        "startDate": "{{google_now_date}}",
+        "location": {
+          "@type": "Place",
+          "name": "AT&T Park",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "24 Willie Mays Plaza",
+            "addressLocality": "San Francisco",
+            "addressRegion": "CA",
+            "postalCode": "94107",
+            "addressCountry": "US"
+          }
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for an Event reservation Google Now card in Gmail.
+    </p>
+  </body>
+</html>

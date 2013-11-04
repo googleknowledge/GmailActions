@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "EmailMessage",
+        "description": "We hope you enjoyed your meal at Joe's Diner. Please rate your experience.",
+        "action": {
+          "@type": "ReviewAction",
+          "review": {
+            "@type": "Review",
+            "itemReviewed": {
+              "@type": "FoodEstablishment",
+              "name": "Joe's Diner"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "bestRating": "5",
+              "worstRating": "1"
+            }
+          },
+          "handler": {
+            "@type": "HttpActionHandler",
+            "url": "http://devnook-devrel.appspot.com/success/{{token}}",
+            "requiredProperty": {
+              "@type": "Property",
+              "name": "review.reviewRating.ratingValue"
+            },
+            "method": "http://schema.org/HttpRequestMethod/POST"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a Rate action in Gmail.
+    </p>
+  </body>
+</html>

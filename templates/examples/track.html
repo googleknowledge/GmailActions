@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "ParcelDelivery",
+      "deliveryAddress": {
+        "@type": "PostalAddress",
+        "streetAddress": "24 Willie Mays Plaza",
+        "addressLocality": "San Francisco",
+        "addressRegion": "CA",
+        "addressCountry": "US",
+        "postalCode": "94107"
+      },
+      "expectedArrival": "{{google_now_card}}",
+      "carrier": {
+        "@type": "Organization",
+        "name": "FedEx"
+      },
+      "itemShipped": {
+        "@type": "Product",
+        "name": "iPod Mini"
+      },
+      "partOfOrder": {
+        "@type": "Order",
+        "orderNumber": "176057",
+        "seller": {
+          "@type": "Organization",
+          "name": "Bob Dole"
+        }
+      },
+      "action": {
+        "@type": "TrackAction",
+        "name": "Track Your Package",
+        "url": "http://devnook-devrel.appspot.com/success/{{token}}"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a Track action in Gmail.
+    </p>
+  </body>
+</html>

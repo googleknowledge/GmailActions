@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "LodgingReservation",
+      "reservationNumber": "abc456",
+      "underName": {
+        "@type": "Person",
+        "name": "John Smith"
+      },
+      "reservationFor": {
+        "@type": "LodgingBusiness",
+        "name": "Hilton San Francisco Union Square",
+        "telephone": "+44 5555555555",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "333 O'Farrell St",
+          "addressLocality": "San Francisco",
+          "addressRegion": "CA",
+          "postalCode": "94102",
+          "addressCountry": "US"
+        }
+      },
+      "reservationStatus": "confirmed",
+      "checkinDate": "{{google_now_date}}",
+      "checkoutDate": "{{google_now_date}}"
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a Hotel reservation Google Now card in Gmail.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "FoodEstablishmentReservation",
+      "reservationNumber": "OT12345",
+      "underName": {
+        "@type": "Person",
+        "name": "John Smith"
+      },
+      "reservationFor": {
+        "@type": "FoodEstablishment",
+        "name": "Wagamama",
+        "telephone": "044755755755",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1 Tavistock Street",
+          "addressLocality": "London",
+          "addressRegion": "Greater London",
+          "postalCode": "WC2E 7PG",
+          "addressCountry": "United Kingdom"
+        }
+      },
+      "startTime": "{{google_now_time}}",
+      "partySize": "2",
+    "reservationStatus": "confirmed",
+    "modifiedTime": "2013-11-03T21:00:00+01:00",
+    "modifyReservationUrl": "http://devnook-devrel.appspot.com/success/{{token}}"
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a Restaurant reservation Google Now card in Gmail.
+    </p>
+  </body>
+</html>

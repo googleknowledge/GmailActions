@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "FlightReservation",
+      "reservationNumber": "RXJ34P",
+      "underName": {
+        "@type": "Person",
+        "name": "Eva Green"
+      },
+      "reservationStatus": "confirmed",
+      "modifyReservationUrl": "http://devnook-devrel.appspot.com/success/{{token}}",
+      "modifiedTime": "2017-03-04T20:15:00-08:00",
+      "reservationFor": {
+        "@type": "Flight",
+        "flightNumber": "110",
+        "airline": {
+          "@type": "Airline",
+          "name": "United",
+          "iataCode": "UA"
+        },
+        "departureAirport": {
+          "@type": "Airport",
+          "name": "San Francisco Airport",
+          "iataCode": "SFO"
+        },
+        "departureTime": "{{google_now_date}}",
+        "arrivalAirport": {
+          "@type": "Airport",
+          "name": "John F. Kennedy International Airport",
+          "iataCode": "JFK"
+        },
+        "arrivalTime": "2017-03-05T06:30:00-05:00"
+      },
+      "checkinUrl": "http://devnook-devrel.appspot.com/success/{{token}}"
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a Flight booking Google Now card in Gmail.
+    </p>
+  </body>
+</html>

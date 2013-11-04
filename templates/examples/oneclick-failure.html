@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "EmailMessage",
+      "description": "Approval request for John's $10.13 expense for office supplies",
+      "action": {
+        "@type": "ConfirmAction",
+        "name": "Approve Expense",
+        "handler": {
+          "@type": "HttpActionHandler",
+          "url": "http://devnook-devrel.appspot.com/failure/{{token}}"
+        }
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <p>
+      This a test for a One-click action in Gmail.
+    </p>
+  </body>
+</html>
