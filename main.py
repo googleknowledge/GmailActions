@@ -76,7 +76,7 @@ class FailureHandler(webapp2.RequestHandler):
       In this example it is a static url, always returns status 400. It also notifies
       the UI via the channel service that this call was received.
       """
-      msg = ('Searver encounter an error! <span class="failure">400 Bad Request</span> ' +
+      msg = ('Server encounter an error! <span class="failure">400 Bad Request</span> ' +
              '<span class="path">/failure/token</span>')
       channel.send_message(token, msg)
       self.error(400)
